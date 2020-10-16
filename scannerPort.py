@@ -1,5 +1,8 @@
+#coding:utf-8
+
 import socket
 import sys
+import errno
 
 portOuvert = []
 portFerme = []
@@ -52,7 +55,12 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 				sock.close()
 				portOuvert.append(PORT[i])
 			else:
-				portFerme.append(PORT[i])
+				if errno.errorcode[errno.ECONNREFUSED]:
+					portFerme.append(PORT[i])
+				else:
+					print("[-] Hote introuvable")
+					j = 1
+					i = len(PORT[:])
 			i += 1
 		except socket.gaierror as e:
 			print("[-] Erreur d'adresse de connexion au serveur: {}".format(e))
