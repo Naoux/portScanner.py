@@ -2,8 +2,6 @@ import socket
 import sys, os
 import errno
 from tqdm import tqdm
-import time
-
 
 portOuvert = []
 portFerme = []
@@ -86,13 +84,15 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 		finally:
 			pass
 
-	if len(portOuvert) == 0:
-		print("[-] Tous les ports sont fermes !")
-	else:
-		for port in portOuvert:
-			print("[+] Port {} ouvert".format(port))
-		for port in portFerme:
-			print("[-] Port {} ferme".format(port))
+	with  open("scan.result", "w") as file:
+		if len(portOuvert) == 0:
+			print("[-] Tous les ports sont fermes !")
+		else:
+			for port in portOuvert:
+				file.write("[+] Port {} ouvert\n".format(port))
+			for port in portFerme:
+				file.write("[-] Port {} ferme\n".format(port))
+
 else:
 	print("Usages: python scannerPort.py <domaine/ip> <PORT>\n",
 		  "\tpython scannerPort.py <domaine/ip> <PORTmin> <PORTmax>")
