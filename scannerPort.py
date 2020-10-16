@@ -76,5 +76,5 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 		for port in portFerme:
 			print("[-] Port {} ferme".format(port))
 else:
-	print("Usages: python scannerPort.py <domaine> <PORT>\n",
-		  "\tpython scannerPort.py <domaine> <PORTmin> <PORTmax>")
+	print("Usages: python scannerPort.py <domaine/ip> <PORT>\n",
+		  "\tpython scannerPort.py <domaine/ip> <PORTmin> <PORTmax>")
