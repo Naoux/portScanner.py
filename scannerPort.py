@@ -1,6 +1,9 @@
 import socket
-import sys
+import sys, os
 import errno
+from tqdm import tqdm
+import time
+
 
 portOuvert = []
 portFerme = []
@@ -38,8 +41,11 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 		print("[-] Port invalide")
 		sys.exit()
 
+	pbar = tqdm(total=len(PORT[:]))
+
 	i = 0
 	while i < len(PORT[:]):
+		pbar.update(1)
 		try:
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			sock.settimeout(1)
@@ -67,6 +73,18 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 		except socket.error as e:
 			print("[-] Erreur de connexion : {}".format(e))
 			sys.exit()
+
+	pbar.close()
+	if "win" in sys.platform:
+		try:
+			os.system("cls")
+		finally:
+			pass
+	else:
+		try:
+			os.system("clear")
+		finally:
+			pass
 
 	if len(portOuvert) == 0:
 		print("[-] Tous les ports sont fermes !")
