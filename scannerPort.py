@@ -1,5 +1,3 @@
-#coding:utf-8
-
 import socket
 import sys
 import errno
@@ -31,7 +29,7 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 	try:
 		PORTmin = int(PORTmin)
 		if len(sys.argv) == 4:
-			for n in range(PORTmin, PORTmax):
+			for n in range(PORTmin, PORTmax + 1):
 				PORT.append(n)
 				n += 1
 		else:
@@ -44,6 +42,7 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 	while i < len(PORT[:]):
 		try:
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			sock.settimeout(1)
 		except socket.error as e:
 			print("[-] Une erreur est survenue lors de la creation du socket ! {}".format(e))
 			sys.exit()
@@ -79,6 +78,3 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 else:
 	print("Usages: python scannerPort.py <domaine> <PORT>\n",
 		  "\tpython scannerPort.py <domaine> <PORTmin> <PORTmax>")
-
-
-
