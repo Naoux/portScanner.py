@@ -95,4 +95,4 @@ if len(sys.argv) == 3 or len(sys.argv) == 4:
 
 else:
 	print("Usages: python scannerPort.py <domaine/ip> <PORT>\n",
-		  "\tpython scannerPort.py <domaine/ip> <PORTmin> <PORTmax>")
+	      "\tpython scannerPort.py <domaine/ip> <PORTmin> <PORTmax>")
